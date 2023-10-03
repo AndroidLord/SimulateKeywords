@@ -104,7 +104,12 @@ public class AllTestCases {
             case '~':
                 simulateKeyPress(robot, KeyEvent.VK_SHIFT, KeyEvent.VK_BACK_QUOTE);
                 break;
-
+            case '_':
+                simulateKeyPress(robot, KeyEvent.VK_SHIFT, KeyEvent.VK_MINUS);
+                break;
+            case '|':
+                simulateKeyPress(robot, KeyEvent.VK_SHIFT, KeyEvent.VK_BACK_SLASH);
+                break;
             default:
                 // Handle letters, digits, and other characters
                 handleCharacter(robot, c);
@@ -117,10 +122,11 @@ public class AllTestCases {
 
     // Helper method to handle letters, digits, and other characters
     private static void handleCharacter(Robot robot, char c) {
-        int keyCode;
         if (Character.isUpperCase(c)) {
-            simulateKeyPress(robot, KeyEvent.VK_SHIFT);
+            robot.keyPress(KeyEvent.VK_SHIFT); // Press Shift key for uppercase letters
         }
+
+        int keyCode;
         try {
             keyCode = KeyEvent.getExtendedKeyCodeForChar(c);
             if (keyCode != KeyEvent.CHAR_UNDEFINED) {
@@ -130,8 +136,9 @@ public class AllTestCases {
             // Character not supported, print an error message
             System.err.println("Unsupported character: " + c);
         }
+
         if (Character.isUpperCase(c)) {
-            simulateKeyRelease(robot, KeyEvent.VK_SHIFT);
+            robot.keyRelease(KeyEvent.VK_SHIFT); // Release Shift key for uppercase letters
         }
     }
 
